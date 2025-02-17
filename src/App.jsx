@@ -1,3 +1,4 @@
+// App.js
 import { useState } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
@@ -24,11 +25,22 @@ function App() {
     setTodos(todos.filter((todo) => todo.id !== id));
   }
 
+  function editTodo(id, newText) {
+    setTodos(
+      todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo))
+    );
+  }
+
   return (
     <div>
       <h1 className="text-red-50">todo list</h1>
-      <TodoForm addTodo={addTodo} text={text} setText={setText} />{" "}
-      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
+      <TodoForm addTodo={addTodo} text={text} setText={setText} />
+      <TodoList
+        todos={todos}
+        toggleTodo={toggleTodo}
+        deleteTodo={deleteTodo}
+        editTodo={editTodo}
+      />
     </div>
   );
 }
